@@ -53,6 +53,7 @@ ingredients_string = ""
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Start the conversation and ask user for input."""
     user_data = context.user_data
+    print(f'{context.user_data=}')
     user_data.clear()
     print(f'{context.user_data=}')
 
@@ -75,9 +76,7 @@ async def input_information(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     context.user_data["ingred_kbd"] = ingred_kbd
 
     ingred_str = "|".join(ingred_list)
-    global ingredients_string
-    ingredients_string = f"^({ingred_str})$"
-    context.user_data["ingredients_string"] = ingredients_string
+    context.user_data["ingredients_string"] = f"^({ingred_str})$"
 
     reply_keyboard = ingred_kbd
     markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
