@@ -165,10 +165,6 @@ application = Application.builder().token("5742009857:AAGIhBQOXEnKPFobwljcFlydST
 # Add conversation handler with the states CHOOSING, TYPING_CHOICE and TYPING_REPLY
 conv_handler = ConversationHandler(
     entry_points=[
-        MessageHandler(
-                filters.TEXT & ~(filters.COMMAND | filters.Regex("^Done$")) & filters.Regex(ingredients_string),
-                regular_choice
-            ),
         CommandHandler("start", start)
     ],
     states={
