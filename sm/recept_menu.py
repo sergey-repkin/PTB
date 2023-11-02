@@ -84,8 +84,10 @@ async def input_information(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 # CHOOSING
 async def regular_choice(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Ask the user for info about the selected predefined choice."""
+
     text = update.message.text
     context.user_data["choice"] = text
+    print(f'{context.user_data=}')
     markup = context.user_data["markup"]
     ingred_dict = context.user_data["ingred_dict"]
     if text in ingred_dict:
@@ -152,7 +154,11 @@ application = Application.builder().token("5742009857:AAGIhBQOXEnKPFobwljcFlydST
 # Add conversation handler with the states CHOOSING, TYPING_CHOICE and TYPING_REPLY
 conv_handler = ConversationHandler(
     entry_points=[
-        CommandHandler("start", start)
+        CommandHandler("start", start),
+        MessageHandler(
+                filters.TEXT & ~(filters.COMMAND | filters.Regex("^Done$")),  # & filters.Regex(ingredients_string),
+                regular_choice
+            ),
     ],
     states={
         INPUTING: [
