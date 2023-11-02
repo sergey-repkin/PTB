@@ -18,8 +18,7 @@ import logging
 import os
 
 from err_hand import error_handler
-from recept import dict_to_str_start, dict_to_str, set_ingred_str_org, \
-    ingred_str_org, ingredstr_to_list_dict
+from recept import dict_to_str_start, dict_to_str, ingredstr_to_list_dict
 
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
 from telegram.ext import (
@@ -38,16 +37,6 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 INPUTING, CHOOSING, TYPING_REPLY, TYPING_CHOICE = range(4)
-
-'''
-ingred_dict={}
-ingred_list=[]
-ingred_kbd=[]
-markup=ReplyKeyboardMarkup([])
-'''
-
-
-# ingredients_string = ""
 
 
 # entry_points
@@ -70,7 +59,6 @@ async def input_information(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     ingred_text = update.message.text
     context.user_data["ingred_text"] = ingred_text
 
-    # global ingred_dict, ingred_list, ingred_kbd
     ingred_dict, ingred_list, ingred_kbd = ingredstr_to_list_dict(ingred_text)
     context.user_data["ingred_dict"] = ingred_dict
     context.user_data["ingred_list"] = ingred_list
