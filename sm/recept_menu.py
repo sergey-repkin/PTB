@@ -143,7 +143,7 @@ async def done(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 """Run the bot."""
 # Create the Application and pass it your bot's token.
-persistence = PicklePersistence(filepath='persfile.txt', update_interval=30)
+persistence = PicklePersistence(filepath='../persfile.txt', update_interval=30)
 
 # persistence = DictPersistence()
 application = Application.builder().token("5742009857:AAGIhBQOXEnKPFobwljcFlydSTIPomhd1a4").persistence(

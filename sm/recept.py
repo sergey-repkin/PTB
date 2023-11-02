@@ -46,9 +46,7 @@ def dict_to_str_start(ingred_dict) -> str:
     facts = [f"{key} - {float(value[0]):.1f}  {' '.join(value[1:])}" for key, value in ingred_dict.items()]
     return "\n".join(facts).join(["\n", "\n"])
 
-def set_ingred_str_org(ingred_text):
-    global ingred_str_org
-    ingred_str_org = ingred_text
+
 
 
 
