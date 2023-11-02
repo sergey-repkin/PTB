@@ -39,16 +39,6 @@ logger = logging.getLogger(__name__)
 
 INPUTING, CHOOSING, TYPING_REPLY, TYPING_CHOICE = range(4)
 
-'''
-ingred_dict={}
-ingred_list=[]
-ingred_kbd=[]
-markup=ReplyKeyboardMarkup([])
-'''
-
-
-# ingredients_string = ""
-
 
 # entry_points
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -70,7 +60,6 @@ async def input_information(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     ingred_text = update.message.text
     context.user_data["ingred_text"] = ingred_text
 
-    # global ingred_dict, ingred_list, ingred_kbd
     ingred_dict, ingred_list, ingred_kbd = ingredstr_to_list_dict(ingred_text)
     context.user_data["ingred_dict"] = ingred_dict
     context.user_data["ingred_list"] = ingred_list
