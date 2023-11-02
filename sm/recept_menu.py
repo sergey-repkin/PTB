@@ -14,7 +14,6 @@ Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
 
-
 import logging
 import os
 
@@ -46,7 +45,9 @@ ingred_list=[]
 ingred_kbd=[]
 markup=ReplyKeyboardMarkup([])
 '''
-ingredients_string = ""
+
+
+# ingredients_string = ""
 
 
 # entry_points
@@ -99,11 +100,10 @@ async def regular_choice(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     context.user_data["choice"] = text
     markup = context.user_data["markup"]
     ingred_dict = context.user_data["ingred_dict"]
-
-    await update.message.reply_html(f"Ингредиент <i>{text} - {ingred_dict[text][0]}</i>.\nИзменить количество ?",
-                                    reply_markup=markup, )
-    print(f'{context.user_data=}')
-    return TYPING_REPLY
+    if text in ingred_dict:
+        await update.message.reply_html(f"Ингредиент <i>{text} - {ingred_dict[text][0]}</i>.\nИзменить количество ?",
+                                        reply_markup=markup, )
+        return TYPING_REPLY
 
 
 # TYPING_REPLY
@@ -176,7 +176,7 @@ conv_handler = ConversationHandler(
         ],
         CHOOSING: [
             MessageHandler(
-                filters.TEXT & ~(filters.COMMAND | filters.Regex("^Done$")) & filters.Regex(ingredients_string),
+                filters.TEXT & ~(filters.COMMAND | filters.Regex("^Done$")),  # & filters.Regex(ingredients_string),
                 regular_choice
             ),
             CommandHandler("start", start)
